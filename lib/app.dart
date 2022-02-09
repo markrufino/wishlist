@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wishlist/features/dashboard/wishlist_dashboard.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wishlist/bloc/login/login_bloc.dart';
+import 'package:wishlist/constants.dart';
 import 'package:wishlist/features/login/login_screen.dart';
 import 'package:wishlist/services/login_repository.dart';
 
@@ -10,12 +12,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Wishlist Tracker',
+      title: kAppTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(
-        repo: LoginRepository(),
+      home: BlocProvider(
+        create: (context) => LoginBloc(LoginRepository()),
+        child: const LoginScreen(),
       ),
     );
   }

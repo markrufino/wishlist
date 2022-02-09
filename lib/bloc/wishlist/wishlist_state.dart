@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
 import 'package:wishlist/models/wish_model.dart';
 
 abstract class WishlistState extends Equatable {
