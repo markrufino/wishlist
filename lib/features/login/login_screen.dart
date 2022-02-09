@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wishlist/bloc/login/login_bloc.dart';
 import 'package:wishlist/bloc/login/login_event.dart';
@@ -60,13 +61,21 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  ElevatedButton _buildLoginButton(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(primary: Colors.redAccent),
-      onPressed: () async {
-        context.read<LoginBloc>().add(LoginButtonTapped());
+  Widget _buildLoginButton(BuildContext context) {
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        if (state is LoginLoading) {
+          return const CupertinoActivityIndicator();
+        }
+        return ElevatedButton(
+          style: ElevatedButton.styleFrom(primary: Colors.redAccent),
+          onPressed: () async {
+            context.read<LoginBloc>().add(LoginButtonTapped());
+          },
+          child: const Text('Login'),
+        );
+        ;
       },
-      child: const Text('Login'),
     );
   }
 
