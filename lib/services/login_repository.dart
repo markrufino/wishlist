@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class LoginRepositoryInterface {
   Future<bool> isLoggedIn();
   Future<UserCredential> login();
+  Future<void> logout();
 }
 
 class LoginRepository extends LoginRepositoryInterface {
@@ -18,5 +19,11 @@ class LoginRepository extends LoginRepositoryInterface {
   Future<bool> isLoggedIn() async {
     User? result = FirebaseAuth.instance.currentUser;
     return result != null;
+  }
+
+  @override
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+    return;
   }
 }

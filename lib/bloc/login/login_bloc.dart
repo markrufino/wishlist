@@ -12,5 +12,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await repo.login();
       emit(LoginSuccess());
     });
+    on<LogoutTapped>((event, emit) async {
+      emit(LogoutLoading());
+      await repo.logout();
+      emit(LogoutSuccess());
+    });
   }
 }

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:wishlist/bloc/login/login_bloc.dart';
 import 'package:wishlist/bloc/login/login_event.dart';
 import 'package:wishlist/bloc/login/login_state.dart';
+import 'package:wishlist/bloc/wishlist/wishlist_bloc.dart';
 import 'package:wishlist/constants.dart';
 import 'package:wishlist/features/dashboard/wishlist_dashboard.dart';
+import 'package:wishlist/services/login_repository.dart';
 import 'package:wishlist/services/wishlist_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -72,8 +74,17 @@ class _LoginScreenState extends State<LoginScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => WishlistDashboard(
-          repo: WishlistRepository(),
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (BuildContext context) => LoginBloc(LoginRepository()),
+            ),
+            BlocProvider(
+              create: (BuildContext context) =>
+                  WishlistBloc(WishlistRepository()),
+            ),
+          ],
+          child: const WishlistDashboard(),
         ),
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:wishlist/models/wish_model.dart';
+import 'package:wishlist/models/wishlist_item_model.dart';
 
 abstract class WishlistState extends Equatable {
   @override
@@ -11,18 +11,10 @@ class WishlistInitialState extends WishlistState {}
 class WishlistLoading extends WishlistState {}
 
 class WishlistLoaded extends WishlistState {
-  final List<WishModel> wishes;
-  WishlistLoaded(this.wishes);
+  final List<WishlistItemModel> items;
+  WishlistLoaded(this.items);
 }
 
-class WishlistAddingItem extends WishlistState {
-  final WishModel wish;
-  WishlistAddingItem(this.wish);
-}
-
-class WishlistItemAdded extends WishlistState {
-  final WishModel wish;
-  WishlistItemAdded(this.wish);
-}
+class WishlistItemAdded extends WishlistState {}
 
 class WishlistError extends WishlistState {}
