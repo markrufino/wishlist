@@ -10,6 +10,7 @@ class LoginRepository extends LoginRepositoryInterface {
   Future<UserCredential> login() async {
     UserCredential userCredential =
         await FirebaseAuth.instance.signInAnonymously();
+    print(userCredential.user?.uid ?? '');
     return userCredential;
   }
 

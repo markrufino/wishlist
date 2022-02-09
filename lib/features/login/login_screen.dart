@@ -21,11 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _automaticallyLoginIfNeeded();
-  }
-
-  _automaticallyLoginIfNeeded() async {
-    _automaticallyLoginIfNeeded();
   }
 
   @override
@@ -67,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(primary: Colors.redAccent),
       onPressed: () async {
-        context.read<LoginBloc>().add(LoginEvents.loginButtonTapped);
+        context.read<LoginBloc>().add(LoginButtonTapped());
       },
       child: const Text('Login'),
     );
