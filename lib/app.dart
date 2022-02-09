@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wishlist/features/dashboard/wishlist_dashboard.dart';
 import 'package:wishlist/features/login/login_screen.dart';
+import 'package:wishlist/services/login_repository.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -12,7 +14,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      home: LoginScreen(
+        repo: LoginRepository(),
+      ),
     );
   }
 }
