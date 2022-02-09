@@ -37,7 +37,8 @@ class LoginScreen extends StatelessWidget {
   ElevatedButton _buildLoginButton(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(primary: Colors.redAccent),
-      onPressed: () {
+      onPressed: () async {
+        await repo.login();
         presentWishlistDashboard(context);
       },
       child: const Text('Login'),
