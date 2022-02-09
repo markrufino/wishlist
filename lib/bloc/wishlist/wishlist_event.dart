@@ -2,11 +2,9 @@ import 'package:equatable/equatable.dart';
 
 abstract class WishlistEvent {}
 
-class WishlistDescriptionInput extends WishlistEvent {
+class AddNewItem extends WishlistEvent {
   final String description;
-  WishlistDescriptionInput(this.description);
+  AddNewItem(this.description);
 }
-
-class AddNewItem extends WishlistEvent {}
 
 class FetchWishlist extends WishlistEvent {}

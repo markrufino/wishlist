@@ -55,6 +55,10 @@ class _WishlistDashboardState extends State<WishlistDashboard> {
       ),
       body: BlocBuilder<WishlistBloc, WishlistState>(
         builder: (context, state) {
+          print(state.runtimeType);
+          if (state is WishlistLoading) {
+            print('adding new item');
+          }
           if (state is WishlistLoaded) {
             return _buildListView(state);
           }
@@ -79,20 +83,21 @@ class _WishlistDashboardState extends State<WishlistDashboard> {
   FloatingActionButton _buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       child: const Icon(Icons.add),
-      onPressed: () {
-        _showAddWishAlert(context);
+      onPressed: () async {
+        final description = await _showAddWishAlert(context);
+        print(description);
+        if (description != null) {
+          context.read<WishlistBloc>().add(AddNewItem(description));
+        }
       },
     );
   }
 
-  void _showAddWishAlert(BuildContext context) {
-    showDialog(
+  Future<String?> _showAddWishAlert(BuildContext context) async {
+    return showDialog(
       context: context,
       builder: (context) {
-        return BlocProvider(
-          create: (context) => WishlistBloc(WishlistRepository()),
-          child: const AddWishAlert(),
-        );
+        return AddWishAlert();
       },
     );
   }

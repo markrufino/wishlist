@@ -21,6 +21,7 @@ class WishlistRepository extends WishlistRepositoryInterface {
         .collection('users')
         .doc(uid)
         .collection('wishlist')
+        .orderBy('timestamp', descending: true)
         .get()
         .then((snapshot) {
       snapshot.docs.forEach(
